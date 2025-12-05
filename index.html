@@ -555,6 +555,33 @@
             color: #777;
             font-size: 0.9rem;
         }
+        /* Styles supplémentaires pour le carousel */
+        .avis-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .avis-card {
+                min-width: 300px !important;
+            }
+            
+            .carousel-btn {
+                display: none !important;
+            }
+            
+            .avis-container {
+                padding: 10px 20px !important;
+            }
+        }
+
+        /* Animation pour les cartes */
+        .avis-card {
+            transition: transform 0.3s ease;
+        }
+
+        .avis-card:hover {
+            transform: translateY(-10px);
+        }
 
         /* AJOUTEZ juste cette règle */
         /* MENU MOBILE CORRIGÉ - Remplacez votre code actuel */
@@ -696,6 +723,109 @@
                 padding: 25px;
             }
         }
+
+        /* ============================================
+        /* CAROUSEL AVIS - VERSION MOBILE AVEC SCROLL */
+@media (max-width: 768px) {
+    /* Container du carousel */
+    .avis-container {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scroll-behavior: smooth !important;
+        gap: 20px !important;
+        padding: 10px 15px 20px 15px !important;
+        margin: 0 -40px !important;
+        width: calc(100% + 90px) !important;
+    }
+    
+    /* Empêcher la sélection de texte pendant le scroll */
+    .avis-container {
+        -webkit-user-select: none !important;
+        user-select: none !important;
+    }
+    
+    /* Cartes d'avis */
+    .avis-card {
+        flex: 0 0 auto !important;
+        width: 85vw !important;
+        min-width: 85vw !important;
+        max-width: 85vw !important;
+        scroll-snap-align: start !important;
+        padding: 25px 20px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        background: white !important;
+        border-radius: 15px !important;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Ajustement pour petits écrans */
+    @media (max-width: 480px) {
+        .avis-card {
+            width: 90vw !important;
+            min-width: 90vw !important;
+            max-width: 90vw !important;
+        }
+    }
+    
+    /* Style de la scrollbar */
+    .avis-container::-webkit-scrollbar {
+        height: 6px !important;
+    }
+    
+    .avis-container::-webkit-scrollbar-track {
+        background: rgba(139, 0, 0, 0.1) !important;
+        border-radius: 10px !important;
+        margin: 0 15px !important;
+    }
+    
+    .avis-container::-webkit-scrollbar-thumb {
+        background: #8b0000 !important;
+        border-radius: 10px !important;
+    }
+    
+    /* Cacher les flèches de navigation sur mobile */
+    .carousel-btn {
+        display: none !important;
+    }
+    
+    /* Indicateurs centrés */
+    .carousel-indicators {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        margin-top: 25px !important;
+        padding: 0 15px !important;
+    }
+    
+    .indicator {
+        width: 8px !important;
+        height: 8px !important;
+        border-radius: 50% !important;
+        background: #ccc !important;
+        cursor: pointer !important;
+        transition: all 0.3s !important;
+    }
+    
+    .indicator.active {
+        background: #8b0000 !important;
+        transform: scale(1.2) !important;
+    }
+    
+    /* Animation au scroll */
+    .avis-card {
+        transition: transform 0.3s ease !important;
+    }
+    
+    .avis-card:hover {
+        transform: translateY(-5px) !important;
+    }
+}
+        
     </style>
 </head>
 <body>
@@ -773,6 +903,147 @@
             
             <div class="menu-items" id="menuItems">
                 <!-- Les éléments du menu seront générés dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avis Clients -->
+    <section id="avis" style="padding: 80px 20px; background: linear-gradient(135deg, #f8f5f0 0%, #e8e5e0 100%);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-title" style="text-align: center; margin-bottom: 50px;">
+                <h2 style="color: #8b0000; font-size: 2.5rem; margin-bottom: 15px; position: relative; display: inline-block;">
+                    ⭐ Avis Clients
+                </h2>
+                <p style="color: #666; font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+                    Découvrez ce que nos clients disent de leur expérience au Restaurant Le Kassa
+                </p>
+            </div>
+            
+            <!-- Carousel d'avis -->
+            <div class="avis-carousel" style="position: relative;">
+                <!-- Boutons de navigation -->
+                <button class="carousel-btn prev" style="position: absolute; left: -50px; top: 50%; transform: translateY(-50%); background: #8b0000; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10;">
+                    ❮
+                </button>
+                
+                <button class="carousel-btn next" style="position: absolute; right: -50px; top: 50%; transform: translateY(-50%); background: #8b0000; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10;">
+                    ❯
+                </button>
+                
+                <!-- Conteneur des avis -->
+                <div class="avis-container" style="display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; padding: 20px 0; scrollbar-width: none;">
+                    <!-- Avis 1 -->
+                    <div class="avis-card" style="min-width: 350px; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                        <div class="avis-header" style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div class="client-photo" style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; margin-right: 15px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 1.8rem; color: #8b0000;">👤</span>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0; color: #2c2c2c;">Amadou Diop</h3>
+                                <div class="stars" style="color: #d4af37; font-size: 1rem;">
+                                    ★★★★★
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: #555; line-height: 1.6; font-style: italic; margin-bottom: 20px;">
+                            "Une expérience culinaire exceptionnelle ! Le thiéboudienne était parfait, les saveurs authentiques de la Casamance. Service impeccable et ambiance chaleureuse."
+                        </p>
+                        <div class="avis-date" style="color: #888; font-size: 0.9rem;">
+                            <i class="fas fa-calendar"></i> 15 novembre 2023
+                        </div>
+                    </div>
+                    
+                    <!-- Avis 2 -->
+                    <div class="avis-card" style="min-width: 350px; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                        <div class="avis-header" style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div class="client-photo" style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; margin-right: 15px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 1.8rem; color: #8b0000;">👩</span>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0; color: #2c2c2c;">Fatou Ndiaye</h3>
+                                <div class="stars" style="color: #d4af37; font-size: 1rem;">
+                                    ★★★★★
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: #555; line-height: 1.6; font-style: italic; margin-bottom: 20px;">
+                            "Nous avons fêté l'anniversaire de ma mère ici. L'équipe a été adorable, la décoration magnifique et la cuisine délicieuse. Un moment inoubliable !"
+                        </p>
+                        <div class="avis-date" style="color: #888; font-size: 0.9rem;">
+                            <i class="fas fa-calendar"></i> 8 décembre 2023
+                        </div>
+                    </div>
+                    
+                    <!-- Avis 3 -->
+                    <div class="avis-card" style="min-width: 350px; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                        <div class="avis-header" style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div class="client-photo" style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; margin-right: 15px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 1.8rem; color: #8b0000;">👨‍👩‍👧</span>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0; color: #2c2c2c;">La Famille Sarr</h3>
+                                <div class="stars" style="color: #d4af37; font-size: 1rem;">
+                                    ★★★★☆
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: #555; line-height: 1.6; font-style: italic; margin-bottom: 20px;">
+                            "Restaurant familial par excellence. Nos enfants ont adoré, espace adapté pour eux. Le yassa poulet était succulent. Nous reviendrons !"
+                        </p>
+                        <div class="avis-date" style="color: #888; font-size: 0.9rem;">
+                            <i class="fas fa-calendar"></i> 22 janvier 2024
+                        </div>
+                    </div>
+                    
+                    <!-- Avis 4 -->
+                    <div class="avis-card" style="min-width: 350px; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                        <div class="avis-header" style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div class="client-photo" style="width: 60px; height: 60px; border-radius: 50%; overflow: hidden; margin-right: 15px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 1.8rem; color: #8b0000;">👨‍💼</span>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0; color: #2c2c2c;">M. Touré</h3>
+                                <div class="stars" style="color: #d4af37; font-size: 1rem;">
+                                    ★★★★★
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: #555; line-height: 1.6; font-style: italic; margin-bottom: 20px;">
+                            "Parfait pour un déjeuner d'affaires. Cadre professionnel, service rapide et discret. La qualité des produits est remarquable. Je recommande vivement."
+                        </p>
+                        <div class="avis-date" style="color: #888; font-size: 0.9rem;">
+                            <i class="fas fa-calendar"></i> 5 février 2024
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Indicateurs de slides -->
+                <div class="carousel-indicators" style="display: flex; justify-content: center; gap: 10px; margin-top: 30px;">
+                    <span class="indicator active" style="width: 12px; height: 12px; border-radius: 50%; background: #8b0000; cursor: pointer;"></span>
+                    <span class="indicator" style="width: 12px; height: 12px; border-radius: 50%; background: #ccc; cursor: pointer;"></span>
+                    <span class="indicator" style="width: 12px; height: 12px; border-radius: 50%; background: #ccc; cursor: pointer;"></span>
+                    <span class="indicator" style="width: 12px; height: 12px; border-radius: 50%; background: #ccc; cursor: pointer;"></span>
+                </div>
+            </div>
+            <!-- Statistiques -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 60px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: #8b0000; font-weight: bold;">4.8</div>
+                    <div style="color: #d4af37; font-size: 1.2rem;">★★★★★</div>
+                    <p style="color: #666; margin-top: 10px;">Note moyenne</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: #8b0000; font-weight: bold;">500+</div>
+                    <p style="color: #666; margin-top: 10px;">Clients satisfaits</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: #8b0000; font-weight: bold;">98%</div>
+                    <p style="color: #666; margin-top: 10px;">Recommanderait</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: #8b0000; font-weight: bold;">3</div>
+                    <p style="color: #666; margin-top: 10px;">Ans d'expérience</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1102,6 +1373,68 @@
         // AJOUTEZ cette ligne au début de votre gestionnaire d'événements :
         const submitBtn = document.getElementById('submitBtn');
         const loadingSpinner = document.getElementById('loadingSpinner');
+
+        const container = document.querySelector('.avis-container');
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+        const indicators = document.querySelectorAll('.indicator');
+        const cards = document.querySelectorAll('.avis-card');
+        
+        let currentIndex = 0;
+        const cardWidth = 350 + 30; // largeur + gap
+
+        // Fonction pour mettre à jour le carousel
+        function updateCarousel() {
+            container.scrollTo({
+                left: currentIndex * cardWidth,
+                behavior: 'smooth'
+            });
+            
+            // Mettre à jour les indicateurs
+            indicators.forEach((indicator, index) => {
+                indicator.style.background = index === currentIndex ? '#8b0000' : '#ccc';
+            });
+        }
+        
+        // Bouton suivant
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < cards.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+        
+        // Bouton précédent
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+        
+        // Indicateurs
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+        
+        // Auto-scroll toutes les 5 secondes
+        setInterval(() => {
+            if (currentIndex < cards.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }, 5000);
+        
+        // Navigation au clavier
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevBtn.click();
+            if (e.key === 'ArrowRight') nextBtn.click();
+        });
 
 
         // Menu mobile
